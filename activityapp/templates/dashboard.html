@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<p><strong>Total emissions:</strong> {{ total_emissions|floatformat:2 }} kg CO₂</p>
+
+<hr>
+
+<h4>Emissions over time</h4>
+<canvas id="emissionChart" height="100"></canvas>
+
+<hr>
+
+<h4 class="mt-4">Recent activities</h4>
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Emissions (kg CO₂)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for log in recent_logs %}
+        <tr>
+            <td>{{ log.date }}</td>
+            <td>{{ log.category.name }}</td>
+            <td>{{ log.amount }} {{ log.category.unit }}</td>
+            <td>{{ log.emissions|floatformat:2 }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No data yet. Add an activity first.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = {{ dates|safe }};           // list of dates from view
+  const data = {{ emissions|safe }};        // list of emissions from view
+
+  const ctx = document.getElementById('emissionChart').getContext('2d');
+  const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Emissions (kg CO₂)',
+              data: data,
+              tension: 0.3
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+{% endblock %}
