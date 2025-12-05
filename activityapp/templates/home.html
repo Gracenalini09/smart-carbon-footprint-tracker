@@ -1,12 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center">
-    <h1 class="mb-3">Welcome to Smart Carbon Footprint Tracker 🌱</h1>
+<div class="row align-items-center">
+  <div class="col-md-6 mb-4">
+    <h1 class="fw-bold mb-3">Track your Carbon Footprint 🌱</h1>
     <p class="lead">
-        Track your daily activities (travel, electricity, food) and see how much CO₂ you emit.
+      Log your daily activities like travel, electricity use and food habits.
+      See how much CO₂ you emit and discover ways to live more sustainably.
     </p>
-    <a href="/dashboard/" class="btn btn-success mt-3">Go to Dashboard</a>
-    <a href="/activity/add/" class="btn btn-outline-success mt-3 ms-2">Add First Activity</a>
+    <div class="mt-3">
+      <a href="/dashboard/" class="btn btn-success me-2">View Dashboard</a>
+      <a href="/activity/add/" class="btn btn-outline-success">Add Activity</a>
+    </div>
+  </div>
+
+  <div class="col-md-6 mb-4">
+    <div class="card app-card">
+      <div class="card-body">
+        <h5 class="card-title">Why this matters 💚</h5>
+        <p class="card-text">
+          Every action has a climate impact. By understanding your carbon
+          footprint, you can identify high-emission habits and make simple
+          changes that protect the planet.
+        </p>
+        <ul class="mb-0">
+          <li>Visualize emissions over time</li>
+          <li>Compare different activities</li>
+          <li>Build climate-friendly routines</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mt-2">
+  <div class="col-md-4">
+    <div class="card app-card h-100">
+      <div class="card-body">
+        <h5 class="card-title">📊 Clear insights</h5>
+        <p class="card-text">Dashboard with charts and tables for quick understanding of your daily impact.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card app-card h-100">
+      <div class="card-body">
+        <h5 class="card-title">📝 Simple logging</h5>
+        <p class="card-text">Log activities in seconds – distance travelled, electricity used, meals eaten.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card app-card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🌍 Sustainable habits</h5>
+        <p class="card-text">Use your data to make small lifestyle changes that add up to big climate wins.</p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

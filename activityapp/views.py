@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from .models import ActivityCategory, ActivityLog
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 def home(request):
+    # Public home page – no login required
     return render(request, 'home.html')
 
 
@@ -46,7 +48,6 @@ def dashboard(request):
     logs = ActivityLog.objects.filter(user=request.user).order_by("date")
     total_emissions = sum(log.emissions for log in logs)
 
-    # Group by date for chart
     daily = {}
     for log in logs:
         key = log.date.strftime("%Y-%m-%d")
@@ -57,8 +58,13 @@ def dashboard(request):
 
     context = {
         "total_emissions": total_emissions,
-        "recent_logs": logs[::-1][:5],  # last 5
+        "recent_logs": logs[::-1][:5],
         "dates": dates,
         "emissions": emissions,
     }
     return render(request, "dashboard.html", context)
+ 
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
