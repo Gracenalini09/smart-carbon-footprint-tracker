@@ -17,11 +17,11 @@
           {% csrf_token %}
           <div class="mb-3">
             <label class="form-label">Username</label>
-            {{ form.username|add_class:"form-control" }}
+            {{ form.username }}
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            {{ form.password|add_class:"form-control" }}
+            {{ form.password }}
           </div>
           <button type="submit" class="btn btn-success w-100">Login</button>
         </form>
